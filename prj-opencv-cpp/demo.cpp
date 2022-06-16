@@ -5,7 +5,7 @@
 int main(int argc, char** argv) {
 	if (argc !=3)
 	{
-		std::cout << " .exe mode_path image_file" << std::endl;
+		std::cout << " .exe model_path image_file" << std::endl;
 		return -1;
 	}
 
