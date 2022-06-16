@@ -13,7 +13,13 @@ class CenterFace(object):
         self.img_h_new, self.img_w_new, self.scale_h, self.scale_w = 0, 0, 0, 0
 
     def __call__(self, img, height, width, threshold=0.5):
+        #print("HEIGHT: ", height)
+        #print("WIDTH: ", width)
+
         self.img_h_new, self.img_w_new, self.scale_h, self.scale_w = self.transform(height, width)
+
+        #print("IMG_H_NEW: ", self.img_h_new)
+        #print("IMG_W_NEW: ", self.img_w_new)
         return self.inference_opencv(img, threshold)
 
     def inference_opencv(self, img, threshold):
@@ -36,6 +42,8 @@ class CenterFace(object):
     def postprocess(self, heatmap, lms, offset, scale, threshold):
         if self.landmarks:
             dets, lms = self.decode(heatmap, scale, offset, lms, (self.img_h_new, self.img_w_new), threshold=threshold)
+            # print("SCALE: ", scale)
+            # print("OFFSET: ", offset)
         else:
             dets = self.decode(heatmap, scale, offset, None, (self.img_h_new, self.img_w_new), threshold=threshold)
         if len(dets) > 0:

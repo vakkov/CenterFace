@@ -26,7 +26,8 @@ def camera():
 
 
 def test_image():
-    frame = cv2.imread('000388.jpg')
+    #frame = cv2.imread('000388.jpg')
+    frame = cv2.imread('../trump/1.jpg')
     h, w = frame.shape[:2]
     landmarks = True
     centerface = CenterFace(landmarks=landmarks)
@@ -42,12 +43,14 @@ def test_image():
         for lm in lms:
             for i in range(0, 5):
                 cv2.circle(frame, (int(lm[i * 2]), int(lm[i * 2 + 1])), 2, (0, 0, 255), -1)
+
+    cv2.imwrite('2_demo_result.jpg', frame)
     cv2.imshow('out', frame)
     cv2.waitKey(0)
 
 
 def test_image_tensorrt():
-    frame = cv2.imread('000388.jpg')
+    frame = cv2.imread('../trump/1.jpg')
     h, w = 480, 640  # must be 480* 640
     landmarks = True
     centerface = CenterFace(landmarks=landmarks, backend="tensorrt")
@@ -104,5 +107,6 @@ def test_widerface():
 
 if __name__ == '__main__':
     # camera()
-    test_image()
+    #test_image()
+    test_image_tensorrt()
     # test_widerface()
